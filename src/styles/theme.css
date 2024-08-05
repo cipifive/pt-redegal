@@ -1,5 +1,10 @@
+@import './navbar.css';
+@import './layout.css';
+@import './characters.css';
+
 :root {
     --blue-titles: rgb(60, 132, 165);
+    --nav-background: #000000
 }
 
 
