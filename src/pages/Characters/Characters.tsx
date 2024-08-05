@@ -1,57 +1,46 @@
-import { ChangeEvent, FC, useEffect, useState } from "react"
-import { getAllCharacters } from "../../services/characterService"
-import { GET_N_CHARACTERS } from "../../constants/characters/endpoints"
-import { CiSearch } from "react-icons/ci";
+import { FC, useContext, useEffect } from 'react'
+import { Finder } from '../../components/Characters/Finder'
+import { Card } from '../../components/Characters/Card'
+import { GlobalContext } from '../../context/GlobalContext'
 
-export const Characters:FC = () => {
+export const Characters: FC = () => {
+  const context = useContext(GlobalContext)
 
-    const [characters, setCharacters] = useState<any[]>([])
+  if (!context) {
+    throw new Error('UserComponent must be used within a GlobalProvider')
+  }
 
-    const [filteredCharacters, setFilteredCharacters] = useState<any[]>([])
+  const { state, setCharacters, setFilteredCharacters } = context
 
-    const [filter, setFilter] = useState<string>("")
+  const fetchNCharacters = async () => {
+    try {
+      //const response = await getAllCharacters(GET_N_CHARACTERS(25))
+      //const { results } = response.data.data
+      let results = JSON.parse(localStorage.getItem('characters') || '[]')
+      console.log(results)
+      setCharacters(results)
+      setFilteredCharacters(results)
+      localStorage.setItem('characters', JSON.stringify(results))
+    } catch (error) {}
+  }
 
-    const handleFilterCharacters = (e:ChangeEvent<HTMLInputElement>) => {
-        let items = [...characters]
-       items = items.filter((item:any) => item.name.includes(e.target.value))
-       setFilter(e.target.value)
-       setFilteredCharacters(items)
-    }
+  useEffect(() => {
+    fetchNCharacters()
+  }, [])
 
-    const fetchNCharacters = async () => {
-        try {
-            const response = await getAllCharacters(GET_N_CHARACTERS(50))
-            const { results } = response.data.data
-            setCharacters(results)
-            setFilteredCharacters(results)
-        } catch (error) {
-            
-        }
-    }
+  return (
+    <main className="characters__wrapper">
+      <Finder
+        characters={state.characters}
+        filteredCharacters={state.filteredCharacters}
+        setFilteredCharacters={setFilteredCharacters}
+      />
 
-    useEffect(() => {
-        fetchNCharacters()
-    },[])
-
-    return (
-        <main className="characters__wrapper">
-            <header className="search-container">
-                <CiSearch className="input-icon" size={20}/>
-                <input className="input-filter"  type="text" value={filter} onChange={handleFilterCharacters} placeholder="SEARCH A CHARACTER"/>
-                <label className="label-filter">{filteredCharacters.length} RESULTS</label>
-            </header>
-            
-            <section className="characters__wrapper-grid">
-                {
-                    filteredCharacters.map((character:any) => {
-                        return (
-                            <article key={character.id}>
-                                {character.name}
-                            </article>
-                        )
-                    })
-                }
-            </section>
-        </main>
-    )
+      <section className="characters__wrapper-grid">
+        {state.filteredCharacters.map((character: any) => {
+          return <Card key={character.id} character={character} />
+        })}
+      </section>
+    </main>
+  )
 }

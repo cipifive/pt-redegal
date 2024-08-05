@@ -10,6 +10,7 @@ axiosInstance.interceptors.request.use(
     const defaultParam = `apikey=${apiKey}`;
 
     if (config.url) {
+      
       if (config.url.includes('?')) {
         config.url += `&${defaultParam}`;
       } else {
