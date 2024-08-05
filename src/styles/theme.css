@@ -1,0 +1,18 @@
+:root {
+    --blue-titles: rgb(60, 132, 165);
+}
+
+
+
+@font-face {
+    font-family: "normal-font";
+    src: url(/assets/fonts/kanit.ttf);
+}
+
+@font-face {
+    font-family: "bold-font";
+    src: url(/assets/fonts/kanitbold.ttf);
+}
+
+
+
