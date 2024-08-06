@@ -133,14 +133,15 @@
     .characterDetail__wrapper-up {
         flex-direction: column;
         justify-content: flex-start;
-        height: 80%;
+
+        min-height: 90%;
         width: 100%;
         clip-path:polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 100% 100%, 0% 100%);
     }
 
     .characterDetail__wrapper-down {
         flex-direction: column;
-        height: 20%;
+        min-height: 80%;
         width: 100%;
     }
 
@@ -150,11 +151,15 @@
 
     .characterDetail__wrapper-up > div {
         flex-direction: column;
-        height: 90%;
+
         width: 100%;
     }
 
     .characterDetail__wrapper-up > div > img {
        width: 100%;
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+      }
 }
