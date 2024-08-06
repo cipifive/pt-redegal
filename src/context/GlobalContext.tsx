@@ -4,6 +4,7 @@ interface State {
   filteredCharacters: any[]
   characters: any[]
   favorites: any[]
+  favView: boolean
 }
 
 interface ContextProps {
@@ -11,6 +12,7 @@ interface ContextProps {
   setFilteredCharacters: (fchars: any[]) => void
   setCharacters: (chars: any[]) => void
   setFavorites: (favs: any[]) => void
+  setFavView: (fview: boolean) => void
 }
 
 // Crear el contexto
@@ -22,6 +24,7 @@ export const GlobalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     filteredCharacters: [],
     characters: [],
     favorites: [],
+    favView: false,
   })
 
   // Funciones para actualizar el estado
@@ -31,10 +34,18 @@ export const GlobalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setState((prevState) => ({ ...prevState, characters }))
   const setFilteredCharacters = (filteredCharacters: any[]) =>
     setState((prevState) => ({ ...prevState, filteredCharacters }))
+  const setFavView = (favView: boolean) =>
+    setState((prevState) => ({ ...prevState, favView }))
 
   return (
     <GlobalContext.Provider
-      value={{ state, setFavorites, setCharacters, setFilteredCharacters }}
+      value={{
+        state,
+        setFavorites,
+        setCharacters,
+        setFilteredCharacters,
+        setFavView,
+      }}
     >
       {children}
     </GlobalContext.Provider>

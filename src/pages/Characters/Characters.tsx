@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import { Finder } from '../../components/Characters/Finder'
 import { Card } from '../../components/Characters/Card'
 import { GlobalContext } from '../../context/GlobalContext'
@@ -11,6 +11,8 @@ export const Characters: FC = () => {
   }
 
   const { state, setCharacters, setFilteredCharacters } = context
+
+  const [filter, setFilter] = useState<string>('')
 
   const fetchNCharacters = async () => {
     try {
@@ -25,8 +27,12 @@ export const Characters: FC = () => {
   }
 
   useEffect(() => {
-    fetchNCharacters()
+    if (!state.favView) fetchNCharacters()
   }, [])
+
+  useEffect(() => {
+    setFilter('')
+  }, [state.favView])
 
   return (
     <main className="characters__wrapper">
@@ -34,12 +40,21 @@ export const Characters: FC = () => {
         characters={state.characters}
         filteredCharacters={state.filteredCharacters}
         setFilteredCharacters={setFilteredCharacters}
+        filter={filter}
+        setFilter={setFilter}
       />
 
       <section className="characters__wrapper-grid">
-        {state.filteredCharacters.map((character: any) => {
-          return <Card key={character.id} character={character} />
-        })}
+        {state.filteredCharacters
+          .filter((character: any) => {
+            if (state.favView) {
+              return state.favorites.some((fav: any) => fav.id === character.id)
+            }
+            return true
+          })
+          .map((character: any) => (
+            <Card key={character.id} character={character} />
+          ))}
       </section>
     </main>
   )

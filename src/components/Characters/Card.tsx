@@ -2,10 +2,13 @@ import { FC, useContext } from 'react'
 import { CiHeart } from 'react-icons/ci'
 import { FaHeart } from 'react-icons/fa'
 import { GlobalContext } from '../../context/GlobalContext'
+import { useNavigate } from 'react-router-dom'
+import { handleFavorites } from '../../utils/functions'
 
 export const Card: FC<any> = (props): JSX.Element => {
   const { character } = props
   const context = useContext(GlobalContext)
+  const navigate = useNavigate()
 
   if (!context) {
     throw new Error('UserComponent must be used within a GlobalProvider')
@@ -13,34 +16,41 @@ export const Card: FC<any> = (props): JSX.Element => {
 
   const { state, setFavorites } = context
 
-  const handleFavorites = (character: any) => {
-    let favs = [...state.favorites]
-    if (favs.map((f) => f.id).includes(character.id)) {
-      favs = favs.filter((f: any) => f.id != character.id)
-      setFavorites(favs)
-    } else {
-      favs = [...favs, character]
-      setFavorites(favs)
-    }
-  }
-
   return (
-    <article className="character-card">
+    <article
+      className="character-card"
+      onClick={() => navigate(`/character/${character.id}`)}
+    >
       <img
         className="card-image"
         alt="Character image"
         src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
       />
       <footer className="character-footer">
-        {character.name}
-        {state.favorites.map((f) => f.id).includes(character.id) ? (
+        <label title={character.name}>
+          {character.name.length > 12
+            ? character.name.slice(0, 12) + '...'
+            : character.name}
+        </label>
+        {state.favorites
+          .map((f) => parseInt(f.id))
+          .includes(parseInt(character.id)) ? (
           <FaHeart
-            size={14}
+            size={24}
             color="red"
-            onClick={() => handleFavorites(character)}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleFavorites(character, state, setFavorites)
+            }}
           />
         ) : (
-          <CiHeart size={18} onClick={() => handleFavorites(character)} />
+          <CiHeart
+            size={28}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleFavorites(character, state, setFavorites)
+            }}
+          />
         )}
       </footer>
     </article>

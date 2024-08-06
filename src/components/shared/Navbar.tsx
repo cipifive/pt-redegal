@@ -1,28 +1,44 @@
 import { FC, useContext } from 'react'
 import logo from '../../assets/Marvel-logo.png'
 import { GlobalContext } from '../../context/GlobalContext'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const Navbar: FC = (props): JSX.Element => {
   const context = useContext(GlobalContext)
+
+  const location = useLocation()
+  const navigate = useNavigate()
 
   if (!context) {
     throw new Error('UserComponent must be used within a GlobalProvider')
   }
 
-  const { state, setFilteredCharacters } = context
+  const { state, setFilteredCharacters, setFavView } = context
+
+  const handleGoHome = () => {
+    if (location.pathname !== '/') {
+      setFilteredCharacters(state.characters)
+      navigate('/')
+    } else {
+      setFilteredCharacters(state.characters)
+    }
+    setFavView(false)
+  }
+
+  const handleFilterFavorites = () => {
+    if (location.pathname !== '/') {
+      setFilteredCharacters(state.favorites)
+      navigate('/')
+    } else {
+      setFilteredCharacters(state.favorites)
+    }
+    setFavView(true)
+  }
 
   return (
     <nav className="navbar">
-      <img
-        src={logo}
-        alt="Marvel logo"
-        height={40}
-        onClick={() => setFilteredCharacters(state.characters)}
-      />
-      <div
-        className="fav-counter"
-        onClick={() => setFilteredCharacters(state.favorites)}
-      >
+      <img src={logo} alt="Marvel logo" height={40} onClick={handleGoHome} />
+      <div className="fav-counter" onClick={handleFilterFavorites}>
         <svg
           width="24"
           height="22"
