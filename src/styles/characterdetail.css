@@ -44,6 +44,7 @@
     align-items: center;
     height: 60%;
     width: 65%;
+    overflow-y: auto;
 }
 
 .characterDetail__wrapper-down > div {
@@ -89,33 +90,71 @@
 }
 
 @media (max-width: 1024px) and (min-width: 600px) {
-    .characters__wrapper-grid {
-        grid-template-columns: repeat(4, 1fr); 
+    .characterDetail__wrapper-up > div {
+        width: 100%;
     }
 
-    .character-card {
-        height: 275px;
-        width: 175px;
+    .characterDetail__wrapper-up > div > img {
+        height: 100%;
+        width: 300px;
+        margin-right: 1rem;
     }
 
-    .card-image {
-        height: 215px;
-        width: 175px;
+    .characterDetail__wrapper-down  {
+        width: 90%;
+        padding-top: 2rem;
+        justify-content: flex-start;
     }
+    .characterDetail__wrapper-down > div {
+        display: flex;
+        
+        overflow-x: none;
+    
+        width: 100%;
+    }
+
+    .characterDetail--info{
+        width: 85%;
+        padding-right: 2rem;
+        
+    }
+
+    .characterDetail__wrapper-up {
+        height: 35%;
+        clip-path:polygon(0% 0%, 100% 0%, 100% 90%, 95% 100%, 100% 100%, 0% 100%);
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+      }
 }
 
 @media (max-width: 599px) {
-    .characters__wrapper-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .characterDetail__wrapper-up {
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 80%;
+        width: 100%;
+        clip-path:polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 100% 100%, 0% 100%);
     }
 
-    .character-card {
-        height: 275px;
-        width: 175px;
+    .characterDetail__wrapper-down {
+        flex-direction: column;
+        height: 20%;
+        width: 100%;
     }
 
-    .card-image {
-        height: 215px;
-        width: 175px;
+    .characterDetail--info{
+        width: 85%;
+    }
+
+    .characterDetail__wrapper-up > div {
+        flex-direction: column;
+        height: 90%;
+        width: 100%;
+    }
+
+    .characterDetail__wrapper-up > div > img {
+       width: 100%;
     }
 }
