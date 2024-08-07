@@ -18,27 +18,43 @@ export const Navbar: FC = (props): JSX.Element => {
   const handleGoHome = () => {
     if (location.pathname !== '/') {
       setFilteredCharacters(state.characters)
+      setFavView(false)
       navigate('/')
     } else {
       setFilteredCharacters(state.characters)
+      setFavView(false)
     }
-    setFavView(false)
   }
 
   const handleFilterFavorites = () => {
     if (location.pathname !== '/') {
       setFilteredCharacters(state.favorites)
+      setFavView(true)
       navigate('/')
     } else {
       setFilteredCharacters(state.favorites)
+      setFavView(true)
     }
-    setFavView(true)
   }
 
   return (
     <nav className="navbar">
-      <img src={logo} alt="Marvel logo" height={40} onClick={handleGoHome} />
-      <div className="fav-counter" onClick={handleFilterFavorites}>
+      <img
+        src={logo}
+        alt="Marvel logo"
+        height={40}
+        onClick={handleGoHome}
+        tabIndex={0}
+        role="button"
+        aria-label="Go to home"
+      />
+      <div
+        tabIndex={0}
+        role="button"
+        aria-label="View favorites"
+        className="fav-counter"
+        onClick={handleFilterFavorites}
+      >
         <svg
           width="24"
           height="22"

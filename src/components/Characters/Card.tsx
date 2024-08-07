@@ -23,7 +23,7 @@ export const Card: FC<any> = (props): JSX.Element => {
     >
       <img
         className="card-image"
-        alt="Character image"
+        alt={`Image of ${character.name}`}
         src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
       />
       <footer className="character-footer">
@@ -37,7 +37,10 @@ export const Card: FC<any> = (props): JSX.Element => {
           .includes(parseInt(character.id)) ? (
           <FaHeart
             size={24}
-            color="red"
+            className="hearth-color"
+            tabIndex={0}
+            aria-label="Remove from favorites"
+            role="button"
             onClick={(e) => {
               e.stopPropagation()
               handleFavorites(character, state, setFavorites)
@@ -46,6 +49,9 @@ export const Card: FC<any> = (props): JSX.Element => {
         ) : (
           <CiHeart
             size={28}
+            tabIndex={0}
+            aria-label="Add to favorites"
+            role="button"
             onClick={(e) => {
               e.stopPropagation()
               handleFavorites(character, state, setFavorites)

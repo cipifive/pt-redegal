@@ -37,8 +37,10 @@ export const Finder: FC<any> = (props): JSX.Element => {
     <>
       {state.favView ? <h2>FAVORITES</h2> : ''}
       <header className="search-container">
-        <CiSearch className="input-icon" size={20} />
+        <CiSearch className="input-icon" size={20} aria-label="Search icon" />
+
         <input
+          id="character-search"
           className="input-filter"
           type="text"
           value={filter}

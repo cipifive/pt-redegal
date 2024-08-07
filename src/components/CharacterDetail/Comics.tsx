@@ -4,7 +4,7 @@ export const Comics: FC<any> = (props) => {
   const { comics } = props
   return (
     <section className="characterDetail__wrapper-down">
-      <span>COMICS</span>
+      <h2>COMICS</h2>
       <div>
         {comics
           .sort((a: any, b: any) => {
@@ -25,7 +25,7 @@ export const Comics: FC<any> = (props) => {
               <article className="comic-card" key={item.id}>
                 <img
                   src={`${item?.thumbnail.path}.${item?.thumbnail.extension}`}
-                  alt={item.title}
+                  alt={`Imagen del comic ${item.title}`}
                 />
                 <label title={item.title}>
                   {item.title.length > 35

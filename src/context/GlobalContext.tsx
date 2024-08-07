@@ -15,10 +15,8 @@ interface ContextProps {
   setFavView: (fview: boolean) => void
 }
 
-// Crear el contexto
 export const GlobalContext = createContext<ContextProps | undefined>(undefined)
 
-// Crear un proveedor de contexto
 export const GlobalProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, setState] = useState<State>({
     filteredCharacters: [],
@@ -27,7 +25,6 @@ export const GlobalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     favView: false,
   })
 
-  // Funciones para actualizar el estado
   const setFavorites = (favorites: any[]) =>
     setState((prevState) => ({ ...prevState, favorites }))
   const setCharacters = (characters: any[]) =>

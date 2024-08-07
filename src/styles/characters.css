@@ -6,6 +6,10 @@
     overflow-y: auto;
 }
 
+.characters__wrapper--loading {
+    border-top: 5px solid red;
+}
+
 .search-container {
     display: flex;
     justify-content: center;
@@ -62,21 +66,33 @@
     justify-content: space-between;
     height: 350px;
     width: 250px;
-    background-color: var(--red-marvel);
+    background-color: black;
     cursor: pointer;
     clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 100% 100%, 0% 100%);
+}
+
+.character-card:hover > .character-footer > svg {
+    color: white;
+}
+
+.hearth-color {
+    color:red
+}
+
+.character-card:hover {
+    background-color: red;
 }
 
 .card-image {
     height: 290px;
     width: 250px;
+    border-bottom: 5px solid red;
 }
 
 .character-footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--nav-background);
     height: 55px;
     color: white;
 }
