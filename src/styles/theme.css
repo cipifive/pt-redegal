@@ -1,0 +1,25 @@
+@import './navbar.css';
+@import './layout.css';
+@import './characters.css';
+@import './characterdetail.css';
+@import './scrollbar.css';
+
+:root {
+    --nav-background: #000000;
+    --red-marvel: red;
+}
+
+
+
+@font-face {
+    font-family: "normal-font";
+    src: url(/assets/fonts/kanit.ttf);
+}
+
+@font-face {
+    font-family: "bold-font";
+    src: url(/assets/fonts/kanitbold.ttf);
+}
+
+
+

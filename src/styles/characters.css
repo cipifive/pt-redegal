@@ -1,0 +1,145 @@
+.characters__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.characters__wrapper--loading {
+    border-top: 5px solid red;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 0;
+}
+
+.input-filter {
+    padding: 1rem;
+    border:none;
+    border-bottom: 1px solid black;
+    font-family: var(--bold-font);
+    width: 100%;
+    margin-left: 1rem;
+}
+
+.label-filter {
+    position: absolute;
+    bottom: -25px;
+    left: 30px;
+    font-family: var(--normal-font);
+    font-size: 12px;
+}
+
+.input-filter:focus {
+    outline: none;
+}
+
+.characters__wrapper-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px; 
+    padding-top:2rem;
+}
+
+.characters__wrapper-grid--items {
+    background-color: #ccc;
+    padding: 20px;
+    border: 1px solid #999;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+    width: 250px;
+    background-color: black;
+    cursor: pointer;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 100% 100%, 0% 100%);
+}
+
+.character-card:hover > .character-footer > svg {
+    color: white;
+}
+
+.hearth-color {
+    color:red
+}
+
+.character-card:hover {
+    background-color: red;
+}
+
+.card-image {
+    height: 290px;
+    width: 250px;
+    border-bottom: 5px solid red;
+}
+
+.character-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 55px;
+    color: white;
+}
+
+
+@media (max-width: 1600px) and (min-width: 601px) {
+    .character-card {
+        height: 300px;
+        width: 100%;
+    }
+
+    .card-image {
+        height: 240px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 600px) {
+    .characters__wrapper-grid {
+        grid-template-columns: repeat(4, 1fr); 
+    }
+
+    .character-card {
+        height: 275px;
+        width: 100%;
+    }
+
+    .card-image {
+        height: 215px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 599px) {
+  
+    .characters__wrapper-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .character-card {
+        height: 275px;
+        width: 100%;
+    }
+
+    .card-image {
+        height: 215px;
+        width: 100%;
+    }
+}
+
