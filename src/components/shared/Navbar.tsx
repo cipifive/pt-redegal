@@ -49,6 +49,7 @@ export const Navbar: FC = (): JSX.Element => {
         aria-label="Go to home"
       />
       <div
+        title="heart-logo"
         tabIndex={0}
         role="button"
         aria-label="View favorites"

@@ -57,7 +57,7 @@ export const Characters: FC = () => {
   }
 
   return (
-    <main className={'characters__wrapper'}>
+    <main data-testid="test-characters" className={'characters__wrapper'}>
       <Finder
         characters={state.characters}
         filteredCharacters={state.filteredCharacters}
