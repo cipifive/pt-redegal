@@ -8,13 +8,23 @@ import { useParams } from 'react-router-dom'
 import { Info } from '../../components/CharacterDetail/Info'
 import { Comics } from '../../components/CharacterDetail/Comics'
 import { checkDataStored } from '../../utils/functions'
+import { IFavs } from '../../models/shared'
+import { IComic } from '../../models/character'
 
-export const CharacterDetail: FC = () => {
+export const CharacterDetail: FC = (): JSX.Element => {
   const { id }: any = useParams()
 
-  const [character, setCharacter] = useState<any>()
+  const [character, setCharacter] = useState<IFavs>({
+    id: 0,
+    name: '',
+    description: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+  })
 
-  const [comics, setComics] = useState<any[]>([])
+  const [comics, setComics] = useState<IComic[]>([])
 
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -65,7 +75,7 @@ export const CharacterDetail: FC = () => {
   }
   return (
     <main className="characterDetail__wrapper">
-      <Info character={character} />
+      <Info character={{ ...character, id: parseInt(`${character.id}`) }} />
       <Comics comics={comics} />
     </main>
   )

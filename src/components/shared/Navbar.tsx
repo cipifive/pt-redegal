@@ -3,7 +3,7 @@ import logo from '../../assets/Marvel-logo.png'
 import { GlobalContext } from '../../context/GlobalContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-export const Navbar: FC = (props): JSX.Element => {
+export const Navbar: FC = (): JSX.Element => {
   const context = useContext(GlobalContext)
 
   const location = useLocation()

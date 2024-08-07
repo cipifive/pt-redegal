@@ -1,8 +1,9 @@
-import { ChangeEvent, FC, useContext, useState } from 'react'
+import { ChangeEvent, FC, useContext } from 'react'
 import { CiSearch } from 'react-icons/ci'
 import { GlobalContext } from '../../context/GlobalContext'
+import { IFavs, PropsFinder } from '../../models/shared'
 
-export const Finder: FC<any> = (props): JSX.Element => {
+export const Finder: FC<PropsFinder> = (props): JSX.Element => {
   const {
     filteredCharacters,
     characters,
@@ -26,7 +27,7 @@ export const Finder: FC<any> = (props): JSX.Element => {
     } else {
       items = [...characters]
     }
-    items = items.filter((item: any) =>
+    items = items.filter((item: IFavs) =>
       item.name.toLowerCase().includes(e.target.value.toLocaleLowerCase()),
     )
     setFilter(e.target.value)

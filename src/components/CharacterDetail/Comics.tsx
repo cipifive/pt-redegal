@@ -1,18 +1,20 @@
 import { FC } from 'react'
+import { PropsComics } from '../../models/shared'
+import { IComic, IDates } from '../../models/character'
 
-export const Comics: FC<any> = (props) => {
+export const Comics: FC<PropsComics> = (props): JSX.Element => {
   const { comics } = props
   return (
     <section className="characterDetail__wrapper-down">
       <h2>COMICS</h2>
       <div>
         {comics
-          .sort((a: any, b: any) => {
+          .sort((a: IComic, b: IComic) => {
             const dateA = a.dates.find(
-              (d: any) => d.type === 'onsaleDate',
+              (d: IDates) => d.type === 'onsaleDate',
             )?.date
             const dateB = b.dates.find(
-              (d: any) => d.type === 'onsaleDate',
+              (d: IDates) => d.type === 'onsaleDate',
             )?.date
 
             if (!dateA) return 1
@@ -20,7 +22,7 @@ export const Comics: FC<any> = (props) => {
 
             return new Date(dateA).getTime() - new Date(dateB).getTime()
           })
-          .map((item: any) => {
+          .map((item: IComic) => {
             return (
               <article className="comic-card" key={item.id}>
                 <img

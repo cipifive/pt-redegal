@@ -3,8 +3,9 @@ import { FaHeart } from 'react-icons/fa'
 import { GlobalContext } from '../../context/GlobalContext'
 import { CiHeart } from 'react-icons/ci'
 import { handleFavorites } from '../../utils/functions'
+import { IFavs, PropsInfo } from '../../models/shared'
 
-export const Info: FC<any> = (props) => {
+export const Info: FC<PropsInfo> = (props): JSX.Element => {
   const { character } = props
   const context = useContext(GlobalContext)
 
@@ -23,10 +24,8 @@ export const Info: FC<any> = (props) => {
         />
         <div className="characterDetail--info">
           <div>
-            <h2>{character?.name}</h2>
-            {state.favorites
-              .map((f) => parseInt(f.id))
-              .includes(parseInt(character?.id)) ? (
+            <h2>{character?.name.toUpperCase()}</h2>
+            {state.favorites.map((f: IFavs) => f.id).includes(character?.id) ? (
               <FaHeart
                 tabIndex={0}
                 aria-label="Remove from favorites"

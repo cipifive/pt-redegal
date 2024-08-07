@@ -1,11 +1,14 @@
+import { ICharacter } from '../models/character'
+import { IFavs, State } from '../models/shared'
+
 export const handleFavorites = (
-  character: any,
-  state: any,
-  callBack: (param: any) => void,
+  character: ICharacter,
+  state: State,
+  callBack: (param: IFavs[]) => void,
 ) => {
-  let favs = [...state.favorites]
-  if (favs.map((f) => parseInt(f.id)).includes(parseInt(character.id))) {
-    favs = favs.filter((f: any) => parseInt(f.id) != parseInt(character.id))
+  let favs: IFavs[] = [...state.favorites]
+  if (favs.map((f: IFavs) => f.id).includes(character.id)) {
+    favs = favs.filter((f: IFavs) => f.id != character.id)
     callBack(favs)
   } else {
     favs = [...favs, character]

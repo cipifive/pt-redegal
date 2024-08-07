@@ -1,19 +1,5 @@
 import { createContext, useState, ReactNode, FC } from 'react'
-
-interface State {
-  filteredCharacters: any[]
-  characters: any[]
-  favorites: any[]
-  favView: boolean
-}
-
-interface ContextProps {
-  state: State
-  setFilteredCharacters: (fchars: any[]) => void
-  setCharacters: (chars: any[]) => void
-  setFavorites: (favs: any[]) => void
-  setFavView: (fview: boolean) => void
-}
+import { ContextProps, IFavs, State } from '../models/shared'
 
 export const GlobalContext = createContext<ContextProps | undefined>(undefined)
 
@@ -25,11 +11,11 @@ export const GlobalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     favView: false,
   })
 
-  const setFavorites = (favorites: any[]) =>
+  const setFavorites = (favorites: IFavs[]) =>
     setState((prevState) => ({ ...prevState, favorites }))
-  const setCharacters = (characters: any[]) =>
+  const setCharacters = (characters: IFavs[]) =>
     setState((prevState) => ({ ...prevState, characters }))
-  const setFilteredCharacters = (filteredCharacters: any[]) =>
+  const setFilteredCharacters = (filteredCharacters: IFavs[]) =>
     setState((prevState) => ({ ...prevState, filteredCharacters }))
   const setFavView = (favView: boolean) =>
     setState((prevState) => ({ ...prevState, favView }))

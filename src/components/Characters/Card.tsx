@@ -4,8 +4,9 @@ import { FaHeart } from 'react-icons/fa'
 import { GlobalContext } from '../../context/GlobalContext'
 import { useNavigate } from 'react-router-dom'
 import { handleFavorites } from '../../utils/functions'
+import { IFavs, PropsInfo } from '../../models/shared'
 
-export const Card: FC<any> = (props): JSX.Element => {
+export const Card: FC<PropsInfo> = (props): JSX.Element => {
   const { character } = props
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
@@ -32,9 +33,7 @@ export const Card: FC<any> = (props): JSX.Element => {
             ? character.name.slice(0, 12) + '...'
             : character.name}
         </label>
-        {state.favorites
-          .map((f) => parseInt(f.id))
-          .includes(parseInt(character.id)) ? (
+        {state.favorites.map((f: IFavs) => f.id).includes(character.id) ? (
           <FaHeart
             size={24}
             className="hearth-color"
